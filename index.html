@@ -296,20 +296,53 @@
     #about .profile-pic-container {
         flex: 1;
         text-align: center;
+        position: relative;
     }
 
     #about .profile-pic {
-        width: 250px;
-        height: 250px;
+        width: 280px;
+        height: 280px;
         border-radius: 50%;
         object-fit: cover;
-        border: 5px solid var(--secondary-color);
-        box-shadow: var(--shadow);
-        transition: transform 0.3s ease;
+        border: 8px solid var(--secondary-color);
+        box-shadow: 0 15px 30px rgba(52, 152, 219, 0.3);
+        transition: all 0.4s ease;
+        position: relative;
+        z-index: 1;
     }
 
     #about .profile-pic:hover {
-        transform: scale(1.05);
+        transform: scale(1.05) rotate(5deg);
+        box-shadow: 0 20px 40px rgba(52, 152, 219, 0.4);
+    }
+
+    .profile-pic-container::before {
+        content: '';
+        position: absolute;
+        width: 320px;
+        height: 320px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+        animation: rotate 8s linear infinite;
+        z-index: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .profile-pic-container::after {
+        content: '';
+        position: absolute;
+        width: 340px;
+        height: 340px;
+        border-radius: 50%;
+        border: 2px dashed var(--accent-color);
+        animation: rotateReverse 12s linear infinite;
+        opacity: 0.7;
+        z-index: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     /* Skills Section */
@@ -366,6 +399,18 @@
         margin-bottom: 0;
         color: var(--primary-color);
         font-weight: 600;
+    }
+
+    /* Power BI specific icon styling */
+    .skill-item .powerbi-icon {
+        width: 2.8rem;
+        height: 2.8rem;
+        margin-bottom: 15px;
+        display: inline-block;
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzI0OUI0RCIgZD0iTTMuMTggMy4xOEMyLjEgNC4yNiAyIDUuNjUgMiA2djEyaDBjMCAuMzUuMSAxIC44IDEuODFDMi45MyAyMC4wOCAzLjg2IDIxIDUgMjFoMTRjMS4xNCAwIDIuMDctLjkyIDIuMi0xLjE5LjctLjgxLjgtMS40Ni44LTEuODFWNmMwLS4zNS0uMS0xLS44LTEuODFDMjEuMDcgMy45MiAyMC4xNCAzIDE5IDNINWMtMS4xNCAwLTIuMDcuOTItMi4yIDEuMTl6TTkgMTFIN3YyaDJ2LTJ6bTQgMkgxMXYyaDJ2LTJ6bTQgMEgxNXYyaDJ2LTJ6bTQtM0gxOXYyaDJWOHoiLz48L3N2Zz4=');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
     }
 
     /* Experience Section */
@@ -1028,6 +1073,16 @@
             transform: translateY(0);
         }
     }
+    
+    @keyframes rotate {
+        from { transform: translate(-50%, -50%) rotate(0deg); }
+        to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    
+    @keyframes rotateReverse {
+        from { transform: translate(-50%, -50%) rotate(360deg); }
+        to { transform: translate(-50%, -50%) rotate(0deg); }
+    }
 
     .animate-on-scroll {
         opacity: 0;
@@ -1133,6 +1188,21 @@
             flex-direction: column;
             gap: 15px;
         }
+        
+        #about .profile-pic {
+            width: 220px;
+            height: 220px;
+        }
+        
+        .profile-pic-container::before {
+            width: 260px;
+            height: 260px;
+        }
+        
+        .profile-pic-container::after {
+            width: 280px;
+            height: 280px;
+        }
     }
 
     @media (max-width: 480px) {
@@ -1153,6 +1223,21 @@
         .contact-form-container h3,
         .contact-info h3 {
             font-size: 1.5rem;
+        }
+        
+        #about .profile-pic {
+            width: 180px;
+            height: 180px;
+        }
+        
+        .profile-pic-container::before {
+            width: 220px;
+            height: 220px;
+        }
+        
+        .profile-pic-container::after {
+            width: 240px;
+            height: 240px;
         }
     }
 </style>
@@ -1183,23 +1268,27 @@
                 <h1>Devesh Singh</h1>
                 <p class="hero-subtitle">Aspiring Software Engineer & Computer Science Student</p>
                 <p class="hero-description">Passionate about Software Engineering, Embedded Systems, and creating innovative solutions through code.</p>
-                <a href="#contact" class="cta-button">Get In Touch</a>
-                  <a href="pdf/22bce7717_re.pdf" class="cta-button" target="_blank" rel="noopener noreferrer">CV</a>
-
-               
+                <div class="hero-buttons">
+                    <a href="#contact" class="cta-button">Get In Touch</a>
+                    <a href="pdf/22bce7717_re.pdf" class="cta-button" target="_blank" rel="noopener noreferrer">Download CV</a>
+                </div>
+            </div>
         </div>
-        
     </section>
 
     <section id="about" class="container">
         <h2 class="section-title animate-on-scroll">About Me</h2>
         <div class="about-content">
             <div class="profile-pic-container animate-on-scroll">
-                <img src="https://public.youware.com/users-website-assets/prod/7bb1c1f9-394f-4927-9e45-3ea78e79233a/g5fb0d4435463593e69424782d1605abec590935fd10b1833561b571a720156a04728eaa091242837b8875e37e8e1ac79cb8086dd74aeef6be4b00a6958fbab31_640.jpg" alt="Profile Picture" class="profile-image">
+                <img src="images/de.jpg" alt="Devesh Singh" class="profile-pic">
             </div>
             <div class="about-text animate-on-scroll">
                 <p>Hello! I'm Devesh Singh, a dedicated and ambitious B.Tech student specializing in Computer Science and Engineering (CSE) at Vellore Institute of Technology. I have a strong foundation in Software Engineering and Embedded Systems, coupled with a deep understanding of Software Systems, Compilers, and UI/UX design.</p>
                 <p>My expertise spans Data Structures, Algorithms (DSA), Object-Oriented Programming (OOP), and I am passionate about solving real-world challenges through innovative projects. I thrive in collaborative environments and am always eager to learn and apply new technologies.</p>
+                <div class="hero-buttons" style="justify-content: flex-start; margin-top: 20px;">
+                    <a href="#skills" class="cta-button" style="padding: 10px 20px;">View Skills</a>
+                    <a href="#projects" class="cta-button" style="padding: 10px 20px;">See Projects</a>
+                </div>
             </div>
         </div>
     </section>
@@ -1215,6 +1304,7 @@
                 <div class="skill-item animate-on-scroll"> <i class="fab fa-js-square"></i> <h4>JavaScript</h4> </div>
                 <div class="skill-item animate-on-scroll"> <i class="fas fa-database"></i> <h4>SQL</h4> </div>
                 <div class="skill-item animate-on-scroll"> <i class="fab fa-r-project"></i> <h4>R</h4> </div>
+                <div class="skill-item animate-on-scroll"> <div class="powerbi-icon"></div> <h4>Power BI</h4> </div>
                 <div class="skill-item animate-on-scroll"> <i class="fas fa-code"></i> <h4>VS Code</h4> </div>
                 <div class="skill-item animate-on-scroll"> <i class="fas fa-laptop-code"></i> <h4>IntelliJ</h4> </div>
                 <div class="skill-item animate-on-scroll"> <i class="fab fa-windows"></i> <h4>Windows</h4> </div>
@@ -1271,7 +1361,7 @@
                     <p>Designed and implemented an Airline Reservation Booking System using Java Swing and MySQL. Features include flight search, seat selection, ticket booking, and admin dashboard.</p>
                     <div class="project-links">
                         <a href="https://github.com/DKVkrk/project1.git" target="_blank" title="View on GitHub"><i class="fab fa-github"></i></a>
-                        <a href="#" target="_blank" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                        
                     </div>
                 </div>
             </div>
@@ -1286,7 +1376,7 @@
                     <p>Developed a hands-free presentation controller using OpenCV and MediaPipe. Recognizes 5+ hand gestures for slide navigation, volume control, and pointer activation with 95% accuracy.</p>
                     <div class="project-links">
                         <a href="https://github.com/DKVkrk/presentaion-controller.git" target="_blank" title="View on GitHub"><i class="fab fa-github"></i></a>
-                        <a href="#" target="_blank" title="Demo Video"><i class="fab fa-youtube"></i></a>
+                       
                     </div>
                 </div>
             </div>
@@ -1297,32 +1387,32 @@
                      alt="Power BI Dashboard" 
                      class="project-image powerbi-image">
                 <div class="project-info">
-                    <h3>Sales Analytics Dashboard</h3>
+                    <h3>Flight Delay Anlaysis Dashboard</h3>
                     <p>Created an interactive Power BI dashboard analyzing 2+ years of sales data. Implemented DAX measures, custom visuals, and drill-through reports that reduced analysis time by 60%.</p>
                     <div class="project-links">
-                        <a href="#" target="_blank" title="View Report"><i class="fab fa-github"></i></a>
-                        <a href="#" target="_blank" title="Case Study"><i class="fas fa-book"></i></a>
+                        <a href="https://github.com/DKVkrk/power-bi.git" target="_blank" title="View Report"><i class="fab fa-github"></i></a>
+                        
                     </div>
                 </div>
             </div>
 
-            <!-- Uber App Clone -->
+            <!-- Stock Market Prediction -->
             <div class="project-card animate-on-scroll">
-                <img src="https://images.unsplash.com/photo-1502920514313-52581002a659?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1167&q=80" 
-                     alt="Rilo" 
-                     class="project-image uberapp-image">
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                     alt="Stock Market Prediction" 
+                     class="project-image stock-image">
                 <div class="project-info">
-                    <h3>Rilo</h3>
-                    <p>Developed a ride-hailing website prototype with featuring real-time tracking, fare estimation, and payment integration. Implemented Google Maps API and Firebase backend.</p>
+                    <h3>Stock Market Prediction</h3>
+                    <p>Developed a stock price prediction model using yfinance dataset. The system analyzes historical data and technical indicators to forecast future stock trends by using company ticker.</p>
                     <div class="project-links">
-                        <a href="#" target="_blank" title="View on GitHub"><i class="fab fa-github"></i></a>
-                        <a href="#" target="_blank" title="App Demo"><i class="fas fa-mobile-alt"></i></a>
+                        <a href="https://github.com/DKVkrk/stock-prediction.git" target="_blank" title="View on GitHub"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
    <section id="education">
     <div class="container">
         <h2 class="section-title animate-on-scroll">Education</h2>
@@ -1387,17 +1477,16 @@
                         <a href="https://leetcode.com/u/Devsh123/" target="_blank" title="LeetCode"><i class="fas fa-code"></i></a>
                     </div>
                 </div>
-                <div class="contact-form-container">
-  <h3>Send Me a Message</h3>
-  <form id="contact-form">
-    <input type="text" name="name" placeholder="Your Name" required />
-    <input type="email" name="email" placeholder="Your Email" required />
-    <textarea name="message" placeholder="Your Message" required></textarea>
-    <button type="submit">Send Message</button>
-    <p id="form-status"></p>
-  </form>
-</div>
-
+                <div class="contact-form-container animate-on-scroll">
+                    <h3>Send Me a Message</h3>
+                    <form id="contact-form">
+                        <input type="text" name="name" placeholder="Your Name" required />
+                        <input type="email" name="email" placeholder="Your Email" required />
+                        <textarea name="message" placeholder="Your Message" required></textarea>
+                        <button type="submit">Send Message</button>
+                        <p id="form-status"></p>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -1411,192 +1500,15 @@
                 <a href="mailto:dk2991999@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
             </div>
             <p>© 2025 Devesh Singh. All rights reserved.</p>
-           
         </div>
     </footer>
 
+    <a href="#hero" class="back-to-top" id="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
     <script>
-        
-  document.getElementById("contact-form").addEventListener("submit", async function (e) {
-    e.preventDefault();
-
-    const form = e.target;
-    const status = document.getElementById("form-status");
-
-    const data = {
-      name: form.name.value,
-      email: form.email.value,
-      message: form.message.value,
-    };
-
-    try {
-      const response = await fetch("http://localhost:5000/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      const result = await response.json();
-
-      // Set status text and color
-      status.innerText = result.message;
-      status.style.color = response.ok ? "green" : "red";
-
-      // Show toast
-      showToast(result.message, response.ok);
-
-      if (response.ok) form.reset();
-    } catch (err) {
-      status.innerText = "❌ Error sending message.";
-      status.style.color = "red";
-      showToast("❌ Error sending message.", false);
-    }
-  });
-
-  function showToast(message, isSuccess = true) {
-    const toast = document.getElementById("toast");
-    toast.innerText = message;
-    toast.style.backgroundColor = isSuccess ? "#27ae60" : "#e74c3c"; // green or red
-    toast.className = "toast show";
-
-    setTimeout(() => {
-      toast.className = toast.className.replace("show", "");
-    }, 3000);
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1665,6 +1577,14 @@
             } else {
                 header.classList.remove('scrolled');
             }
+            
+            // Back to top button visibility
+            const backToTop = document.getElementById('back-to-top');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
         });
         
         // Scroll animations
@@ -1698,9 +1618,54 @@
         });
         // Initial check in case elements are already in view on load
         handleScrollAnimation();
+        
+        // Contact form submission
+        document.getElementById("contact-form").addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const status = document.getElementById("form-status");
+
+            const data = {
+                name: form.name.value,
+                email: form.email.value,
+                message: form.message.value,
+            };
+
+            try {
+                const response = await fetch("http://localhost:5000/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data),
+                });
+
+                const result = await response.json();
+
+                // Set status text and color
+                status.innerText = result.message;
+                status.style.color = response.ok ? "green" : "red";
+
+                // Show toast
+                showToast(result.message, response.ok);
+
+                if (response.ok) form.reset();
+            } catch (err) {
+                status.innerText = "❌ Error sending message.";
+                status.style.color = "red";
+                showToast("❌ Error sending message.", false);
+            }
+        });
+
+        function showToast(message, isSuccess = true) {
+            const toast = document.getElementById("toast");
+            toast.innerText = message;
+            toast.style.backgroundColor = isSuccess ? "#27ae60" : "#e74c3c"; // green or red
+            toast.className = "toast show";
+
+            setTimeout(() => {
+                toast.className = toast.className.replace("show", "");
+            }, 3000);
+        }
     </script>
 </body>
-<!-- Toast Notification -->
-<div id="toast" class="toast"></div>
-
 </html>
